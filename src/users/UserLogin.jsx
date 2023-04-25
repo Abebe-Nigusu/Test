@@ -1,13 +1,32 @@
 import React, { useState } from "react";
+import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Link, useNavigate } from "react-router-dom";
 
 const UserLogin = () => {
   // Define state variables for email and password
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  let navigate = useNavigate();
+
   // Define event handlers for form submission and input changes
+
   const handleSubmit = (e) => {
+    e.preventDefault();
+    const { email, password } = loggedInUser;
+    axios
+      .post("http://localhost:8080/users/process/register", loggedInUser)
+      .then((response) => {
+        console.log(response);
+        navigate("/home");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  /*   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(`Email: ${email}, Password: ${password}`);
     // Perform login logic here
@@ -19,7 +38,7 @@ const UserLogin = () => {
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
-  };
+  }; */
 
   // Render the login form
   return (

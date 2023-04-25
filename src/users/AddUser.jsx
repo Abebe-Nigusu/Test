@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import UserLogin from "./UserLogin";
 
@@ -9,21 +9,40 @@ export default function AddUser() {
   const [user, setUser] = useState({
     username: "",
     email: "",
-    confirmPassword: "",
     role: "",
+    confirmPassword: "",
   });
 
-  const { username, email, role, password, confirmPassword } = user;
+  const { username, email, role, password, confirm } = user;
 
   const onInputChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  const onSubmit = async (e) => {
+  //  useEffect(() => {
+  //    loadUser();
+  //  }, []);
+
+  const onSubmit = (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:8080/users/process/register", user);
-    navigate("/home");
-  };
+     const { username, email, role, password, confirm } = user;
+    axios.post("http://localhost:8080/users/process/register", user)
+      .then((response) => {
+        console.log(response);
+        navigate("/viewmovie/1");
+      })
+       .catch ((err) => {
+    console.log(err);
+  });
+}
+
+  // useEffect(() => {
+  //   fetch("http://localhost:8080/student/getAll")
+  //     .then((res) => res.json())
+  //     .then((result) => {
+  //       setUser(result);
+  //     });
+  // }, []);
 
   return (
     <div className="container">
@@ -85,15 +104,15 @@ export default function AddUser() {
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="confirmPassword" className="form-label">
+              <label htmlFor="confirm" className="form-label">
                 Confirm Password
               </label>
               <input
                 type={"text"}
                 className="form-control"
                 placeholder="Enter your Confirm Password"
-                name="confirmPassword"
-                value={confirmPassword}
+                name="confirm"
+                value={confirm}
                 onChange={(e) => onInputChange(e)}
               />
             </div>
