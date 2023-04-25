@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
+
 export default function Home() {
   const [movies, setMovies] = useState([]);
 
@@ -25,23 +26,29 @@ export default function Home() {
   // };
 
   return (
-    <div className="container">
-      <div className="row">
-        {movies.map((movie, index) => (
-          <div className="col-md-3 border rounded p-4 mt-2 shadow">
-            <Card style={{ width: "18rem" }}>
-              <Card.Img variant="top" src={movie.posterImage} height={250} />
-              <Card.Body>
-                <Card.Title>{movie.title}</Card.Title>
-                <Card.Text>{movie.duration}</Card.Text>
-                <Button variant="primary">
-                  <Link to={`/viewmovie/${movie.id}`}>Back to Home</Link>
-                </Button>
-              </Card.Body>
-            </Card>
-          </div>
-        ))}
+    <div>
+      <div className="container">
+        <h1>Featured Movies</h1>
+        <div className="row">
+          {movies.map((movie, index) => (
+            <div className="col-md-3 border rounded p-4 mt-2 shadow">
+              <Card style={{ width: "18rem" }}>
+                <Card.Img variant="top" src={movie.posterImage} height={250} />
+                <Card.Body>
+                  <Card.Title>{movie.title}</Card.Title>
+                  <Card.Text>{movie.duration}</Card.Text>
+                  <Button variant="dark">
+                    <Link to={`/viewmovie/${movie.id}`}>
+                      Show Movie Details
+                    </Link>
+                  </Button>
+                </Card.Body>
+              </Card>
+            </div>
+          ))}
+        </div>
       </div>
+      
     </div>
   );
 }

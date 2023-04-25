@@ -30,7 +30,12 @@ export default function ViewMovie() {
           <Card.Body>
             <Card.Title>{movie.title}</Card.Title>
             <Card.Text>{movie.duration}</Card.Text>
-            <Button variant="primary">Go somewhere</Button>
+            <Button variant="dark">
+              <Link to={`/home`}> Return to HomePage</Link>
+            </Button>
+            <Button variant="dark">
+              <Link to={`/payment`}>Pay Here</Link>
+            </Button>
           </Card.Body>
         </Card>
       </div>
