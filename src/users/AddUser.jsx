@@ -25,7 +25,7 @@ export default function AddUser() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-     const { username, email, role, password, confirm } = user;
+    //  const { username, email, role, password, confirm } = user;
     axios.post("http://localhost:8080/users/process/register", user)
       .then((response) => {
         console.log(response);
