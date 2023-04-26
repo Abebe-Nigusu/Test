@@ -11,6 +11,10 @@ export default function ViewMovie() {
     posterImage: "",
   });
 
+  // const [showTime, setshowTime] = useState; ({
+  //    startTime: ""
+  //  })
+
   const { id } = useParams();
 
   useEffect(() => {
@@ -38,6 +42,12 @@ export default function ViewMovie() {
             </Button>
           </Card.Body>
         </Card>
+      </div>
+      <div>
+        <h1>{movie.title}</h1>
+        <p>Duration: {movie.duration} minutes</p>
+        {/* <p>Start Time: {showtimes.startTime}</p> */}
+        <p>startTime="7:00 PM"</p>
       </div>
     </div>
   );

@@ -119,7 +119,7 @@ export default function AddUser() {
             <button type="submit" className="btn btn-primary">
               Submit
             </button>
-            <Link className="btn btn-danger mx-2" to="/">
+            <Link className="btn btn-danger mx-2" to="/home">
               Cancel
             </Link>
           </form>
