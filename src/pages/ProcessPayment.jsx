@@ -1,60 +1,86 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import Form from "react-bootstrap/Form";
+import { useNavigate } from "react-router-dom";
+import { Alert } from "react-bootstrap";
 
-const ProcessPayment = () => {
-  const [price, setPrice] = useState(0);
-  const [seatId, setSeatId] = useState("");
-  const [purchaseDate, setPurchaseDate] = useState(new Date());
-  const [showtime, setShowtime] = useState("");
+export default function ProcessPayment() {
+  const [movie, setMovie] = useState({
+    title: "",
+    duration: "",
+    posterImage: "",
+  });
 
-  const handlePurchase = (e) => {
+  let navigate = useNavigate();
+
+  // const [showTime, setshowTime] = useState; ({
+  //    startTime: ""
+  //  })
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    loadMovie();
+  }, []);
+
+  const loadMovie = async () => {
+    const result = await axios.get(`http://localhost:8080/movie/data/${id}`);
+    setMovie(result.data);
+  };
+
+  const [showTime, setshowTime] = useState({
+    startTime: "",
+    movie: "",
+    room: "",
+  });
+  const [selectedOption, setSelectedOption] = useState("");
+
+  const { startTime, movie1, room } = showTime;
+
+  const onInputChange = (e) => {
+    setshowTime({ ...showTime, [e.target.name]: e.target.value });
+  };
+
+  const onSubmit = (e) => {
     e.preventDefault();
-    // handle the purchase logic here
+    const { startTime, movie, room } = showTime;
+    axios
+      .post("http://localhost:8080/showtime/data/all", showTime)
+      .then((response) => {
+        console.log(response);
+        navigate("/viewmovie/1");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
-    <div>
-      <h1>Ticket Page</h1>
-      <form onSubmit={handlePurchase}>
-        <label>
-          Price:
-          <input
-            type="number"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-          />
-        </label>
-        <label>
-          Seat ID:
-          <input
-            type="text"
-            value={seatId}
-            onChange={(e) => setSeatId(e.target.value)}
-          />
-        </label>
-        <label>
-          Purchase Date:
-          <input
-            type="date"
-            value={purchaseDate}
-            onChange={(e) => setPurchaseDate(e.target.value)}
-          />
-        </label>
-        <label>
-          Showtime:
-          <input
-            type="text"
-            value={showtime}
-            onChange={(e) => setShowtime(e.target.value)}
-          />
-        </label>
-        <button type="submit">Purchase Ticket</button>
-        <button type="submit">
-          <Link to={`/home`}> Return to HomePage</Link>
-        </button>
-      </form>
+    <div className="container">
+      <br /> <br /> <br />
+      <div className="row">
+        <div className="col-md-3">
+          <Card style={{ width: "18rem" }}>
+            <Card.Img variant="top" src={movie.posterImage} height={250} />
+            <Card.Body>
+              <Card.Title>{movie.title}</Card.Title>
+              <Card.Text>Show Time: 2 PM</Card.Text>
+              <Card.Text>Room: Room 1</Card.Text>
+              <Card.Text>Seat: Seat 1D</Card.Text>
+              <Card.Text>Price: 30 US</Card.Text>
+              <Button variant="dark" type="submit">
+                Confirm Purchase
+              </Button>
+              <Button variant="dark">
+                <Link to={`/home`}> Return to HomePage</Link>
+              </Button>
+            </Card.Body>
+          </Card>
+        </div>
+      </div>
     </div>
   );
-};
-
-export default ProcessPayment;
+}

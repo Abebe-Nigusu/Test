@@ -17,7 +17,7 @@ function App() {
         <Routes>
           <Route exact path="/home" element={<Home />} />
           <Route exact path="/adduser" element={<AddUser />} />
-          <Route exact path="/payment" element={<ProcessPayment />} />
+          <Route exact path="/payment/:id" element={<ProcessPayment />} />
           <Route exact path="/show/new" element={<AddShow />} />
         {/* <Route exact path="/loginU" element={<UserLogin />} />  */}
           <Route exact path="/edituser/:id" element={<EditUser />} />
