@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Form from 'react-bootstrap/Form';
 
 export default function AddUser() {
   let navigate = useNavigate();
@@ -10,6 +11,7 @@ export default function AddUser() {
     movie: "",
     room: "",
   });
+  const [selectedOption, setSelectedOption] = useState("");
 
   const { startTime, movie, room } = showTime;
 
@@ -51,7 +53,20 @@ export default function AddUser() {
                 onChange={(e) => onInputChange(e)}
               />
             </div>
-            <div className="mb-3">
+            <Form.Select aria-label="Default select example">
+              <option>Movies</option>
+              <option value="{movie.title}">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </Form.Select>
+
+            <Form.Select aria-label="Default select example">
+              <option>Rooms</option>
+              <option value="{movie.title}">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </Form.Select>
+            {/* <div className="mb-3">
               <label htmlFor="movie" className="form-label">
                 Movie
               </label>
@@ -63,8 +78,9 @@ export default function AddUser() {
                 value={movie}
                 onChange={(e) => onInputChange(e)}
               />
-            </div>
-            <div className="mb-3">
+
+
+            {/* <div className="mb-3">
               <label htmlFor="room" className="form-label">
                 Room
               </label>
@@ -76,7 +92,8 @@ export default function AddUser() {
                 value={room}
                 onChange={(e) => onInputChange(e)}
               />
-            </div>
+            </div> */}
+
             <button type="submit" className="btn btn-primary">
               Add Show
             </button>
