@@ -69,9 +69,9 @@ export default function ViewMovie() {
               <Button variant="dark">
                 <Link to={`/home`}> Return to HomePage</Link>
               </Button>
-              <Button variant="dark">
+              {/* <Button variant="dark">
                 <Link to={`/payment/${movie.id}`}>Pay Here</Link>
-              </Button>
+              </Button> */}
             </Card.Body>
           </Card>
         </div>
@@ -109,10 +109,10 @@ export default function ViewMovie() {
               &nbsp; &nbsp;
             </p>
 
-            <button type="submit" className="btn btn-primary">
-              Add Show
+            <button type="submit" className="btn btn-warning">
+              <Link to={`/payment/${movie.id}`}>Pay Here</Link>
             </button>
-            <Link className="btn btn-danger mx-2" to="/">
+            <Link className="btn btn-danger mx-2" to="/home">
               Cancel
             </Link>
           </form>

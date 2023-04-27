@@ -1,11 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 // import Container from "react-bootstrap/Container";
 // import Nav from "react-bootstrap/Nav";
 // import Navbar from "react-bootstrap/Navbar";
 
 export default function Navbar() {
+  const [movie, setMovie] = useState({
+    title: "",
+    duration: "",
+    posterImage: "",
+  });
+
+  let navigate = useNavigate();
+
+  // const [showTime, setshowTime] = useState; ({
+  //    startTime: ""
+  //  })
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    loadMovie();
+  }, []);
+
+  const loadMovie = async () => {
+    const result = await axios.get(`http://localhost:8080/movie/data/${id}`);
+    setMovie(result.data);
+  };
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -25,7 +51,12 @@ export default function Navbar() {
                     aria-label="Search"
                   />
                   <Button className="rounded-pill" variant="primary">
-                    Search
+                    <Link
+                      to={`/viewmovie/${movie.id}`}
+                      className="navbar-brand"
+                    >
+                      Search
+                    </Link>
                   </Button>
                 </Form>
               </Col>

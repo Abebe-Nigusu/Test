@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const UserLogin = () => {
@@ -6,12 +7,15 @@ const UserLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  let navigate = useNavigate();
+
   // Define event handlers for form submission and input changes
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(`Email: ${email}, Password: ${password}`);
     // Perform login logic here
+    navigate("/home");
   };
 
   const handleEmailChange = (e) => {

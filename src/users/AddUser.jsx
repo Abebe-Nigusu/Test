@@ -7,13 +7,13 @@ export default function AddUser() {
   let navigate = useNavigate();
 
   const [user, setUser] = useState({
-    username: "",
+    userName: "",
     email: "",
     role: "",
     confirmPassword: "",
   });
 
-  const { username, email, role, password, confirm } = user;
+  const { userName, email, role, password, confirm } = user;
 
   const onInputChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -25,16 +25,17 @@ export default function AddUser() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    //  const { username, email, role, password, confirm } = user;
-    axios.post("http://localhost:8080/users/process/register", user)
+    // const { username, email, role, password, confirm } = user;
+    axios
+      .post("http://localhost:8080/users/process/register", user)
       .then((response) => {
         console.log(response);
         navigate("/viewmovie/1");
       })
-       .catch ((err) => {
-    console.log(err);
-  });
-}
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   // useEffect(() => {
   //   fetch("http://localhost:8080/student/getAll")
@@ -52,15 +53,15 @@ export default function AddUser() {
 
           <form onSubmit={(e) => onSubmit(e)}>
             <div className="mb-3">
-              <label htmlFor="username" className="form-label">
+              <label htmlFor="userName" className="form-label">
                 User Name
               </label>
               <input
                 type={"text"}
                 className="form-control"
                 placeholder="Enter your username"
-                name="username"
-                value={username}
+                name="userName"
+                value={userName}
                 onChange={(e) => onInputChange(e)}
               />
             </div>
@@ -117,7 +118,9 @@ export default function AddUser() {
               />
             </div>
             <button type="submit" className="btn btn-primary">
-              Submit
+              <Link className="btn btn-white mx-2" to="/home">
+                Submit
+              </Link>
             </button>
             <Link className="btn btn-danger mx-2" to="/home">
               Cancel

@@ -71,7 +71,7 @@ export default function ProcessPayment() {
               <Card.Text>Room: Room 1</Card.Text>
               <Card.Text>Seat: Seat 1D</Card.Text>
               <Card.Text>Price: 30 US</Card.Text>
-              <Button variant="dark" type="submit">
+              <Button variant="info" type="submit">
                 Confirm Purchase
               </Button>
               <Button variant="dark">

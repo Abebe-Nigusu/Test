@@ -1,12 +1,13 @@
 import axios from "axios";
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 export default function ViewUser() {
   const [user, setUser] = useState({
-    name: "",
-    username: "",
+    userName: "",
     email: "",
+    role: "",
+    password: "",
   });
 
   const { id } = useParams();
@@ -45,7 +46,7 @@ export default function ViewUser() {
               </ul>
             </div>
           </div>
-          <Link className="btn btn-primary my-2" to={"/"}>
+          <Link className="btn btn-primary my-2" to={"/home"}>
             Back to Home
           </Link>
         </div>
