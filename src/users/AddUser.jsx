@@ -30,7 +30,8 @@ export default function AddUser() {
       .post("http://localhost:8080/users/process/register", user)
       .then((response) => {
         console.log(response);
-        navigate("/viewmovie/1");
+
+        // navigate("/home");
       })
       .catch((err) => {
         console.log(err);

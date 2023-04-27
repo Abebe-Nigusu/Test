@@ -15,7 +15,7 @@ const UserLogin = () => {
     e.preventDefault();
     console.log(`Email: ${email}, Password: ${password}`);
     // Perform login logic here
-    navigate("/home");
+    // navigate("/home");
   };
 
   const handleEmailChange = (e) => {
